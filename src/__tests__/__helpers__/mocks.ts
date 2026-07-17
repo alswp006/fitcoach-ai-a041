@@ -140,6 +140,11 @@ export function mockTds() {
     BottomCTA: ({ children }: any) =>
       React.createElement("div", { "data-slot": "bottom-cta" }, children),
 
+    // FixedBottomCTA is itself a <button> (.d.ts: HTMLButtonElement ref) — used by
+    // src/components/BottomCTA.tsx's SubmitFooter, the mandated golden 1차 CTA pattern.
+    FixedBottomCTA: ({ children, onClick, disabled }: any) =>
+      React.createElement("button", { onClick, disabled, "data-slot": "fixed-bottom-cta" }, children),
+
     BottomSheet: Object.assign(
       ({ children, open }: any) =>
         open ? React.createElement("div", { role: "dialog" }, children) : null,

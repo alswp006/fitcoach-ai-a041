@@ -156,10 +156,14 @@ export interface RouteState {
     TossPurchase.tsx
     TossRewardAd.tsx
   hooks/
+    useCamera.ts
   lib/
     AppContext.tsx
+    api.ts
     date.ts
     exercises.ts
+    promo.ts
+    speech.ts
     storage.challenges.ts
     storage.plans.ts
     storage.sessions.ts
@@ -177,8 +181,11 @@ export interface RouteState {
   vite-env.d.ts
 
 ### Exports (src/lib/)
+- api.ts: export async function postPlan(req: PlanRequest): Promise<Result<PlanResponse>>; export async function postReport(req: ReportRequest): Promise<Result<ReportResponse>>
 - date.ts: export function getThisWeekMonday(): string; export function getTodayDateString(): string
 - exercises.ts: export const exercises: Exercise[] = [squat, pushup, plank, lunge, burpee, mountainclimber]; export function getExerciseById(id: string): Exercise | undefined; export function getAllExercises(): Exercise[]; export function getFreeExercises(): Exercise[]
+- promo.ts: export async function grantPromo( promotionCode: string, amount: number ): Promise<
+- speech.ts: export function speak(text: string): void
 - storage.challenges.ts: export interface Challenge; export interface CompletionResult; export function getChallenges(): Challenge[]; export function joinChallenge(id: string, challenge: Challenge): void; export function completeToday(challengeId: string): CompletionResult; export function generateShareCode(): string
 - storage.plans.ts: export interface WorkoutPlan; export function getPlans(): WorkoutPlan[]; export function savePlan(plan: WorkoutPlan): void; export function getPlanForWeek(weekOf: string): WorkoutPlan | undefined
 - storage.sessions.ts: export function getSessions(): WorkoutSession[]; export function getSessionById(id: string): WorkoutSession | undefined; export async function addSession( session: WorkoutSession ): Promise<StorageResult>; export function getReports(): AnalysisReport[]; export function getReportBySessionId( sessionId: string ): AnalysisReport | undefined; export async function saveReport( report: AnalysisReport ): Promise<StorageResult>
@@ -203,6 +210,7 @@ export interface RouteState {
 - TossRewardAd.tsx: TossRewardAd
 
 ### Module Dependencies (import graph)
+  lib/api.ts → imports: lib/types
   lib/exercises.ts → imports: lib/types
   lib/storage.challenges.ts → imports: lib/storage, lib/date
   lib/storage.plans.ts → imports: lib/storage
