@@ -157,7 +157,12 @@ export interface RouteState {
     TossRewardAd.tsx
   hooks/
   lib/
+    AppContext.tsx
+    date.ts
     exercises.ts
+    storage.challenges.ts
+    storage.plans.ts
+    storage.sessions.ts
     storage.ts
     types.ts
     utils.ts
@@ -172,7 +177,11 @@ export interface RouteState {
   vite-env.d.ts
 
 ### Exports (src/lib/)
+- date.ts: export function getThisWeekMonday(): string; export function getTodayDateString(): string
 - exercises.ts: export const exercises: Exercise[] = [squat, pushup, plank, lunge, burpee, mountainclimber]; export function getExerciseById(id: string): Exercise | undefined; export function getAllExercises(): Exercise[]; export function getFreeExercises(): Exercise[]
+- storage.challenges.ts: export interface Challenge; export interface CompletionResult; export function getChallenges(): Challenge[]; export function joinChallenge(id: string, challenge: Challenge): void; export function completeToday(challengeId: string): CompletionResult; export function generateShareCode(): string
+- storage.plans.ts: export interface WorkoutPlan; export function getPlans(): WorkoutPlan[]; export function savePlan(plan: WorkoutPlan): void; export function getPlanForWeek(weekOf: string): WorkoutPlan | undefined
+- storage.sessions.ts: export function getSessions(): WorkoutSession[]; export function getSessionById(id: string): WorkoutSession | undefined; export async function addSession( session: WorkoutSession ): Promise<StorageResult>; export function getReports(): AnalysisReport[]; export function getReportBySessionId( sessionId: string ): AnalysisReport | undefined; export async function saveReport( report: AnalysisReport ): Promise<StorageResult>
 - storage.ts: export const LS_KEYS =; export function safeGet<T>(key: string, fallback: T): T; export function safeSet<T>(key: string, value: T): StorageOutcome; export function getProfile<T = any>(): T | null; export function saveProfile<T extends object>(profile: T): StorageOutcome; export function getFlags<T extends object = AppFlags>(): T; export function saveFlags<T extends object>(flags: T): StorageOutcome; export function patchFlags<T extends object = AppFlags>( partial: Partial<T> ): StorageOutcome
 - types.ts: export interface UserProfile; export interface JointRule; export interface Exercise; export interface WorkoutPlan; export interface WorkoutSession; export interface AnalysisReport; export interface Challenge; export interface AppFlags
 - utils.ts: export function cn(...classes: (string | boolean | undefined | null)[]): string; export function formatNumber(n: number): string; export function formatCurrency(n: number, currency = 'KRW'): string
@@ -195,6 +204,9 @@ export interface RouteState {
 
 ### Module Dependencies (import graph)
   lib/exercises.ts → imports: lib/types
+  lib/storage.challenges.ts → imports: lib/storage, lib/date
+  lib/storage.plans.ts → imports: lib/storage
+  lib/storage.sessions.ts → imports: lib/types, lib/storage
   lib/storage.ts → imports: lib/types
 CRITICAL: Before creating any new function, type, or component, check the list above. If something similar exists, import and use it.
 
@@ -204,3 +216,4 @@ CRITICAL: Before creating any new function, type, or component, check the list a
 - 0003: localStorage 저수준 래퍼 + 프로필/플래그 CRUD (files: src/lib/storage.ts)
 - 0007: 환경변수 예시 파일 정리 (files: .env.example)
 - 0004: 세션/리포트 저장소 (200개 상한 + quota 재시도) (files: src/lib/storage.sessions.ts)
+- 0006: AppContext (플래그·프로필·프리미엄 만료 검사) (files: src/lib/AppContext.tsx, src/main.tsx)
