@@ -1,4 +1,4 @@
-// Stub file for TDD - implementation will be added by coder
+import { LS_KEYS, safeGet, safeSet } from "@/lib/storage";
 
 export interface WorkoutPlan {
   id: string;
@@ -9,14 +9,21 @@ export interface WorkoutPlan {
   }>;
 }
 
-export function savePlan(plan: WorkoutPlan): void {
-  throw new Error("Not implemented");
-}
+const MAX_PLANS = 8;
 
 export function getPlans(): WorkoutPlan[] {
-  throw new Error("Not implemented");
+  return safeGet<WorkoutPlan[]>(LS_KEYS.plans, []);
+}
+
+export function savePlan(plan: WorkoutPlan): void {
+  const plans = getPlans();
+  plans.push(plan);
+  if (plans.length > MAX_PLANS) {
+    plans.splice(0, plans.length - MAX_PLANS);
+  }
+  safeSet(LS_KEYS.plans, plans);
 }
 
 export function getPlanForWeek(weekOf: string): WorkoutPlan | undefined {
-  throw new Error("Not implemented");
+  return getPlans().find((plan) => plan.weekOf === weekOf);
 }
