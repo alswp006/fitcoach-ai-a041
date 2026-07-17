@@ -157,7 +157,6 @@ export interface RouteState {
     TossRewardAd.tsx
   hooks/
   lib/
-    exercises.ts (packet 0002)
     storage.ts
     types.ts
     utils.ts
@@ -175,7 +174,6 @@ export interface RouteState {
 - storage.ts: export function getItem<T>(key: string): T | null; export function setItem<T>(key: string, value: T): void; export function removeItem(key: string): void
 - types.ts: export interface UserProfile; export interface JointRule; export interface Exercise; export interface WorkoutPlan; export interface WorkoutSession; export interface AnalysisReport; export interface Challenge; export interface AppFlags
 - utils.ts: export function cn(...classes: (string | boolean | undefined | null)[]): string; export function formatNumber(n: number): string; export function formatCurrency(n: number, currency = 'KRW'): string
-- exercises.ts: export const exercises: Exercise[]; export function getExerciseById(id: string): Exercise | undefined; export function getAllExercises(): Exercise[]; export function getFreeExercises(): Exercise[]
 
 ### Components (src/components/)
 - AdSlot.tsx: AdSlot
@@ -196,4 +194,4 @@ CRITICAL: Before creating any new function, type, or component, check the list a
 
 ## Already Implemented (do NOT duplicate or overwrite)
 - 0001: 엔티티 타입 + RouteState + API 계약 정의 (files: src/lib/types.ts)
-- 0002: Exercise 정적 카탈로그 (files: src/lib/exercises.ts; 6개 운동: squat/pushup/plank 무료, lunge/burpee/mountainclimber 유료; JointRule + 한국어 피드백; 헬퍼: getExerciseById/getAllExercises/getFreeExercises)
+- 0002: Exercise 정적 카탈로그 (files: src/lib/exercises.ts)
