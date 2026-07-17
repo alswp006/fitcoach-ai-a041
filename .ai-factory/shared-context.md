@@ -195,3 +195,4 @@ CRITICAL: Before creating any new function, type, or component, check the list a
 ## Already Implemented (do NOT duplicate or overwrite)
 - 0001: 엔티티 타입 + RouteState + API 계약 정의 (files: src/lib/types.ts)
 - 0002: Exercise 정적 카탈로그 (files: src/lib/exercises.ts)
+- 0003: localStorage 저수준 래퍼 + 프로필/플래그 CRUD (files: src/lib/storage.ts)
