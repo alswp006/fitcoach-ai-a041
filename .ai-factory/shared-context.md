@@ -227,3 +227,4 @@ CRITICAL: Before creating any new function, type, or component, check the list a
 - 0006: AppContext (플래그·프로필·프리미엄 만료 검사) (files: src/lib/AppContext.tsx, src/main.tsx)
 - 0008: AI API 클라이언트 (plan · report) (files: src/lib/api.ts)
 - 0009: 프로모션 리워드 유틸 (5,000원 클램프) (files: src/lib/promo.ts)
+- 0012: 온보딩 페이지 /onboarding (files: src/pages/Onboarding.tsx)
