@@ -157,6 +157,7 @@ export interface RouteState {
     TossRewardAd.tsx
   hooks/
   lib/
+    exercises.ts
     storage.ts
     types.ts
     utils.ts
@@ -171,7 +172,8 @@ export interface RouteState {
   vite-env.d.ts
 
 ### Exports (src/lib/)
-- storage.ts: export function getItem<T>(key: string): T | null; export function setItem<T>(key: string, value: T): void; export function removeItem(key: string): void
+- exercises.ts: export const exercises: Exercise[] = [squat, pushup, plank, lunge, burpee, mountainclimber]; export function getExerciseById(id: string): Exercise | undefined; export function getAllExercises(): Exercise[]; export function getFreeExercises(): Exercise[]
+- storage.ts: export const LS_KEYS =; export function safeGet<T>(key: string, fallback: T): T; export function safeSet<T>(key: string, value: T): StorageOutcome; export function getProfile<T = any>(): T | null; export function saveProfile<T extends object>(profile: T): StorageOutcome; export function getFlags<T extends object = AppFlags>(): T; export function saveFlags<T extends object>(flags: T): StorageOutcome; export function patchFlags<T extends object = AppFlags>( partial: Partial<T> ): StorageOutcome
 - types.ts: export interface UserProfile; export interface JointRule; export interface Exercise; export interface WorkoutPlan; export interface WorkoutSession; export interface AnalysisReport; export interface Challenge; export interface AppFlags
 - utils.ts: export function cn(...classes: (string | boolean | undefined | null)[]): string; export function formatNumber(n: number): string; export function formatCurrency(n: number, currency = 'KRW'): string
 
@@ -190,9 +192,14 @@ export interface RouteState {
 - SummaryHero.tsx: SummaryHero
 - TossPurchase.tsx: TossPurchase
 - TossRewardAd.tsx: TossRewardAd
+
+### Module Dependencies (import graph)
+  lib/exercises.ts → imports: lib/types
+  lib/storage.ts → imports: lib/types
 CRITICAL: Before creating any new function, type, or component, check the list above. If something similar exists, import and use it.
 
 ## Already Implemented (do NOT duplicate or overwrite)
 - 0001: 엔티티 타입 + RouteState + API 계약 정의 (files: src/lib/types.ts)
 - 0002: Exercise 정적 카탈로그 (files: src/lib/exercises.ts)
 - 0003: localStorage 저수준 래퍼 + 프로필/플래그 CRUD (files: src/lib/storage.ts)
+- 0007: 환경변수 예시 파일 정리 (files: .env.example)

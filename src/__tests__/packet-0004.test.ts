@@ -112,7 +112,7 @@ describe("Session/Report Storage (200-item cap + quota retry)", () => {
       callCount++;
       if (key === LS_KEYS.sessions && callCount === 1) {
         const err = new DOMException("Quota exceeded");
-        (err as any).name = "QuotaExceededError";
+        Object.defineProperty(err, "name", { value: "QuotaExceededError" });
         throw err;
       }
       originalSetItem.call(this, key, value);
@@ -130,7 +130,7 @@ describe("Session/Report Storage (200-item cap + quota retry)", () => {
       caloriesBurned: 100,
       feedbackCounts: {},
     } as WorkoutSession));
-    localStorage.setItem(LS_KEYS.sessions, JSON.stringify(sessions));
+    originalSetItem.call(localStorage, LS_KEYS.sessions, JSON.stringify(sessions));
 
     // Act: Add new session; first setItem fails with quota, second succeeds
     const newSession: WorkoutSession = {
@@ -168,7 +168,7 @@ describe("Session/Report Storage (200-item cap + quota retry)", () => {
     Storage.prototype.setItem = vi.fn(function (this: Storage, key: string, value?: string) {
       if (key === LS_KEYS.sessions) {
         const err = new DOMException("Quota exceeded");
-        (err as any).name = "QuotaExceededError";
+        Object.defineProperty(err, "name", { value: "QuotaExceededError" });
         throw err;
       }
       originalSetItem.call(this, key, value ?? "{}");
@@ -185,7 +185,7 @@ describe("Session/Report Storage (200-item cap + quota retry)", () => {
       caloriesBurned: 100,
       feedbackCounts: {},
     } as WorkoutSession));
-    localStorage.setItem(LS_KEYS.sessions, JSON.stringify(sessions));
+    originalSetItem.call(localStorage, LS_KEYS.sessions, JSON.stringify(sessions));
 
     // Act: Add session; both attempts fail
     const newSession: WorkoutSession = {
@@ -321,7 +321,7 @@ describe("Session/Report Storage (200-item cap + quota retry)", () => {
     Storage.prototype.setItem = vi.fn(function (this: Storage, key: string, value?: string) {
       if (key === LS_KEYS.reports) {
         const err = new DOMException("Quota exceeded");
-        (err as any).name = "QuotaExceededError";
+        Object.defineProperty(err, "name", { value: "QuotaExceededError" });
         throw err;
       }
       originalSetItem.call(this, key, value ?? "{}");
