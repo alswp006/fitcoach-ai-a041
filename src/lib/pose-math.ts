@@ -18,7 +18,17 @@ export interface Point2D {
  * @returns Angle in degrees (0-180)
  */
 export function calculateAngle(p1: Point2D, p2: Point2D, p3: Point2D): number {
-  // TODO: Implement angle calculation
-  // Formula: angle = arccos((v1·v2) / (|v1||v2|)) where v1 and v2 are vectors from p2
-  throw new Error("calculateAngle not implemented");
+  const v1 = { x: p1.x - p2.x, y: p1.y - p2.y };
+  const v2 = { x: p3.x - p2.x, y: p3.y - p2.y };
+
+  const dot = v1.x * v2.x + v1.y * v2.y;
+  const mag1 = Math.hypot(v1.x, v1.y);
+  const mag2 = Math.hypot(v2.x, v2.y);
+
+  if (mag1 === 0 || mag2 === 0) {
+    return 0;
+  }
+
+  const cosAngle = Math.min(1, Math.max(-1, dot / (mag1 * mag2)));
+  return (Math.acos(cosAngle) * 180) / Math.PI;
 }
