@@ -15,6 +15,7 @@ const ROUTES: { path: string; name: string }[] = [
   { path: "/onboarding", name: "onboarding" },
   { path: "/workout/squat", name: "workout" },
   { path: "/report/visual-smoke-session", name: "report" },
+  { path: "/challenges", name: "challenges" },
   { path: "/premium", name: "premium" },
 ];
 
@@ -51,6 +52,17 @@ async function seed(page: Page): Promise<void> {
           caloriesBurned: 245,
           aiGenerated: true,
           createdAt: 1700000000000,
+        },
+      ]),
+    );
+    window.localStorage.setItem(
+      "fitcoach:challenges",
+      JSON.stringify([
+        {
+          id: "squat-7day",
+          name: "7일 스쿼트 챌린지",
+          shareCode: "AB12CD",
+          completedDates: ["2026-07-15", "2026-07-16"],
         },
       ]),
     );

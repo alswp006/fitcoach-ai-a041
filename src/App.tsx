@@ -5,6 +5,7 @@ import Onboarding from './pages/Onboarding';
 import Plan from './pages/Plan';
 import Workout from './pages/Workout';
 import Report from './pages/Report';
+import Challenges from './pages/Challenges';
 import Premium from './pages/Premium';
 import { AppProvider } from './lib/AppContext';
 
@@ -24,6 +25,7 @@ export default function App() {
         <Route path="/plan" element={<Plan />} />
         <Route path="/workout/:exerciseId" element={<Workout />} />
         <Route path="/report/:sessionId" element={<Report />} />
+        <Route path="/challenges" element={<Challenges />} />
         <Route path="/premium" element={<Premium />} />
         {DevTdsGallery && (
           <Route
