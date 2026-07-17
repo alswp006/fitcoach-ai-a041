@@ -13,6 +13,7 @@ import { test, expect, type Page } from "@playwright/test";
 const ROUTES: { path: string; name: string }[] = [
   { path: "/", name: "home" },
   { path: "/onboarding", name: "onboarding" },
+  { path: "/workout/squat", name: "workout" },
   { path: "/report/visual-smoke-session", name: "report" },
   { path: "/premium", name: "premium" },
 ];
