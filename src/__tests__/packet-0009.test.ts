@@ -1,7 +1,9 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 
 // Mock @apps-in-toss/web-framework BEFORE importing grantPromo
-const mockGrantPromotionReward = vi.fn();
+const { mockGrantPromotionReward } = vi.hoisted(() => ({
+  mockGrantPromotionReward: vi.fn(),
+}));
 vi.mock("@apps-in-toss/web-framework", () => ({
   grantPromotionReward: mockGrantPromotionReward,
 }));
