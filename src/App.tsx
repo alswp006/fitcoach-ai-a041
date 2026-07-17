@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import Home from './pages/Home';
 import Onboarding from './pages/Onboarding';
+import Plan from './pages/Plan';
 import Report from './pages/Report';
 import Premium from './pages/Premium';
 import { AppProvider } from './lib/AppContext';
@@ -19,6 +20,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/onboarding" element={<Onboarding />} />
+        <Route path="/plan" element={<Plan />} />
         <Route path="/report/:sessionId" element={<Report />} />
         <Route path="/premium" element={<Premium />} />
         {DevTdsGallery && (
