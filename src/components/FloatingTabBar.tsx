@@ -2,6 +2,9 @@ import type { ReactNode } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { generateHapticFeedback } from "@apps-in-toss/web-framework";
 
+(globalThis as any).__debugHooks = (globalThis as any).__debugHooks || {};
+(globalThis as any).__debugHooks.FloatingTabBar_useLocation = useLocation;
+
 export type TabItem = {
   label: string;
   /** Asset.ContentIcon 등(선택). 없으면 라벨만 표시. */
@@ -21,6 +24,7 @@ export type TabItem = {
 export function FloatingTabBar({ items }: { items: TabItem[] }) {
   const navigate = useNavigate();
   const location = useLocation();
+  console.log("TABBAR_DEBUG pathname=", location.pathname);
 
   return (
     <nav

@@ -106,7 +106,6 @@ export default function Plan() {
   }
 
   function handleCreateClick() {
-    console.log('DEBUG handleCreateClick isPremium=', isPremium);
     fireHaptic('success');
     if (isPremium) {
       runCreatePlan();
@@ -208,8 +207,6 @@ export default function Plan() {
   ) : null;
 
   const areaContent = status === 'done' && resultContent ? resultContent : creationPanel;
-
-  console.log('DEBUG render gateActive=', gateActive, 'passedGate=', passedGate, 'status=', status);
 
   return (
     <ScreenScaffold top={<Top title={<Top.TitleParagraph>이번 주 AI 플랜</Top.TitleParagraph>} />}>

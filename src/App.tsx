@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import { lazy, Suspense, useEffect, type ReactElement } from 'react';
+import { lazy, Suspense, type ReactElement } from 'react';
 import Home from './pages/Home';
 import Onboarding from './pages/Onboarding';
 import Plan from './pages/Plan';
@@ -23,22 +23,17 @@ const TAB_BAR_PATHS = new Set(['/', '/plan', '/challenges']);
 /** onboardingDone===false면 /onboarding으로 replace 리다이렉트하는 라우트 가드. */
 function RequireOnboarding({ children }: { children: ReactElement }) {
   const { flags } = useApp();
-  console.log('DEBUG RequireOnboarding flags.onboardingDone=', flags.onboardingDone);
   if (!flags.onboardingDone) {
     return <Navigate to="/onboarding" replace />;
   }
   return children;
 }
 
-let __renderCount = 0;
+let __appRoutesRenderCount = 0;
 function AppRoutes() {
   const location = useLocation();
-  __renderCount += 1;
-  const myRender = __renderCount;
-  console.log('DEBUG AppRoutes RENDER#', myRender, 'location.pathname=', location.pathname);
-  useEffect(() => {
-    console.log('DEBUG AppRoutes COMMITTED#', myRender, 'location.pathname=', location.pathname);
-  });
+  __appRoutesRenderCount += 1;
+  console.log("APPROUTES_DEBUG count=", __appRoutesRenderCount, "pathname=", location.pathname, "key=", location.key);
 
   return (
     <>

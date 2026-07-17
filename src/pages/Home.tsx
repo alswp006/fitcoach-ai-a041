@@ -8,6 +8,7 @@ import { Card } from '@/components/Card';
 import { Amount } from '@/components/Amount';
 import { EmptyState } from '@/components/StateView';
 import { PremiumSheet } from '@/components/PremiumSheet';
+import { AdSlot } from '@/components/AdSlot';
 import { useApp } from '@/lib/AppContext';
 import { getSessions } from '@/lib/storage.sessions';
 import { getPlanForWeek } from '@/lib/storage.plans';
@@ -41,10 +42,8 @@ function fireTickHaptic() {
 }
 
 export default function Home() {
-  console.log('DEBUG Home render start');
   const navigate = useNavigate();
   const { profile, isPremium } = useApp();
-  console.log('DEBUG Home after useApp', profile, isPremium);
   const [sheetOpen, setSheetOpen] = useState(false);
 
   const nickname = profile?.nickname ?? '회원';
@@ -181,6 +180,10 @@ export default function Home() {
       ) : (
         <EmptyState title="아직 운동 기록이 없어요" description="첫 운동을 시작해 보세요" />
       )}
+
+      <Spacing size={24} />
+
+      <AdSlot adGroupId={import.meta.env.VITE_TOSS_AD_GROUP_ID} />
 
       <Spacing size={80} />
 
