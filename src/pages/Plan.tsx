@@ -7,7 +7,6 @@ import { SummaryHero } from '@/components/SummaryHero';
 import { Card } from '@/components/Card';
 import { EmptyState } from '@/components/StateView';
 import { TossRewardAd } from '@/components/TossRewardAd';
-import { FloatingTabBar } from '@/components/FloatingTabBar';
 import { useApp } from '@/lib/AppContext';
 import { postPlan } from '@/lib/api';
 import { savePlan, getPlanForWeek } from '@/lib/storage.plans';
@@ -39,11 +38,6 @@ const DIFFICULTY_LABEL: Record<Exercise['difficulty'], string> = {
   intermediate: '중급',
   advanced: '고급',
 };
-
-const TAB_ITEMS = [
-  { label: '홈', path: '/' },
-  { label: '플랜', path: '/plan' },
-];
 
 function loadCachedPlan(weekOf: string): PlanData | null {
   const record = getPlanForWeek(weekOf) as PersistedPlan | undefined;
@@ -228,7 +222,6 @@ export default function Plan() {
       )}
 
       <Spacing size={80} />
-      <FloatingTabBar items={TAB_ITEMS} />
     </ScreenScaffold>
   );
 }

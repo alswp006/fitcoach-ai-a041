@@ -100,8 +100,10 @@ function validate(form: FormState): FieldErrors {
 }
 
 export default function Onboarding() {
+  console.log('DEBUG Onboarding render');
   const navigate = useNavigate();
   const [flags] = useState<AppFlags>(() => getFlags<AppFlags>());
+  console.log('DEBUG Onboarding flags.onboardingDone=', flags.onboardingDone);
   const [aiAcknowledged, setAiAcknowledged] = useState(flags.aiNoticeAcknowledged);
   const [form, setForm] = useState<FormState>(INITIAL_FORM);
   const [errors, setErrors] = useState<FieldErrors>({});

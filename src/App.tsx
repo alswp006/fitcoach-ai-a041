@@ -1,5 +1,5 @@
-import { Routes, Route } from 'react-router-dom';
-import { lazy, Suspense } from 'react';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { lazy, Suspense, useEffect, type ReactElement } from 'react';
 import Home from './pages/Home';
 import Onboarding from './pages/Onboarding';
 import Plan from './pages/Plan';
@@ -7,7 +7,8 @@ import Workout from './pages/Workout';
 import Report from './pages/Report';
 import Challenges from './pages/Challenges';
 import Premium from './pages/Premium';
-import { AppProvider } from './lib/AppContext';
+import { AppProvider, useApp } from './lib/AppContext';
+import { AppTabBar } from './components/AppTabBar';
 
 // Dev-only TDS Gallery route — `import.meta.env.DEV` is statically replaced
 // (true in dev, false in prod) so the entire import + Route is tree-shaken
@@ -16,17 +17,45 @@ const DevTdsGallery = import.meta.env.DEV
   ? lazy(() => import('./pages/__TdsGallery'))
   : null;
 
-export default function App() {
+// /, /plan, /challenges만 하단 FloatingTabBar를 노출하는 탭-루트다.
+const TAB_BAR_PATHS = new Set(['/', '/plan', '/challenges']);
+
+/** onboardingDone===false면 /onboarding으로 replace 리다이렉트하는 라우트 가드. */
+function RequireOnboarding({ children }: { children: ReactElement }) {
+  const { flags } = useApp();
+  console.log('DEBUG RequireOnboarding flags.onboardingDone=', flags.onboardingDone);
+  if (!flags.onboardingDone) {
+    return <Navigate to="/onboarding" replace />;
+  }
+  return children;
+}
+
+let __renderCount = 0;
+function AppRoutes() {
+  const location = useLocation();
+  __renderCount += 1;
+  const myRender = __renderCount;
+  console.log('DEBUG AppRoutes RENDER#', myRender, 'location.pathname=', location.pathname);
+  useEffect(() => {
+    console.log('DEBUG AppRoutes COMMITTED#', myRender, 'location.pathname=', location.pathname);
+  });
+
   return (
-    <AppProvider>
+    <>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<RequireOnboarding><Home /></RequireOnboarding>} />
         <Route path="/onboarding" element={<Onboarding />} />
-        <Route path="/plan" element={<Plan />} />
-        <Route path="/workout/:exerciseId" element={<Workout />} />
-        <Route path="/report/:sessionId" element={<Report />} />
-        <Route path="/challenges" element={<Challenges />} />
-        <Route path="/premium" element={<Premium />} />
+        <Route path="/plan" element={<RequireOnboarding><Plan /></RequireOnboarding>} />
+        <Route
+          path="/workout/:exerciseId"
+          element={<RequireOnboarding><Workout /></RequireOnboarding>}
+        />
+        <Route
+          path="/report/:sessionId"
+          element={<RequireOnboarding><Report /></RequireOnboarding>}
+        />
+        <Route path="/challenges" element={<RequireOnboarding><Challenges /></RequireOnboarding>} />
+        <Route path="/premium" element={<RequireOnboarding><Premium /></RequireOnboarding>} />
         {DevTdsGallery && (
           <Route
             path="/__tds-gallery"
@@ -37,7 +66,17 @@ export default function App() {
             }
           />
         )}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
+      {TAB_BAR_PATHS.has(location.pathname) && <AppTabBar />}
+    </>
+  );
+}
+
+export default function App() {
+  return (
+    <AppProvider>
+      <AppRoutes />
     </AppProvider>
   );
 }

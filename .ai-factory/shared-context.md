@@ -240,3 +240,4 @@ CRITICAL: Before creating any new function, type, or component, check the list a
 - 0010: 카메라 훅 + 음성 피드백 유틸 (files: src/hooks/useCamera.ts, src/lib/speech.ts)
 - 0013: 홈 대시보드 / (files: src/pages/Home.tsx, src/components/PremiumSheet.tsx)
 - 0015: 운동 세션 페이지 /workout/:exerciseId (files: src/pages/Workout.tsx)
+- 0017: 챌린지 페이지 /challenges (files: src/pages/Challenges.tsx)

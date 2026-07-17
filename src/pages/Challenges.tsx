@@ -5,7 +5,6 @@ import { ScreenScaffold } from '@/components/ScreenScaffold';
 import { SummaryHero } from '@/components/SummaryHero';
 import { Amount } from '@/components/Amount';
 import { EmptyState } from '@/components/StateView';
-import { FloatingTabBar } from '@/components/FloatingTabBar';
 import {
   getChallenges,
   joinChallenge,
@@ -23,12 +22,6 @@ interface ChallengeTemplate {
 
 const CHALLENGE_CATALOG: ChallengeTemplate[] = [
   { id: 'squat-7day', name: '7일 스쿼트 챌린지', targetDays: 7, description: '7일 동안 매일 스쿼트' },
-];
-
-const TAB_ITEMS = [
-  { label: '홈', path: '/' },
-  { label: '플랜', path: '/plan' },
-  { label: '챌린지', path: '/challenges' },
 ];
 
 /** SDK는 WebView 밖에서 throw하므로 가드 필수. */
@@ -80,7 +73,7 @@ export default function Challenges() {
   }
 
   return (
-    <ScreenScaffold top={<Top title={<Top.TitleParagraph>챌린지</Top.TitleParagraph>} />}>
+    <ScreenScaffold top={<Top title={<Top.TitleParagraph>나의 챌린지</Top.TitleParagraph>} />}>
       {challenges.length === 0 ? (
         <EmptyState
           title="참여 중인 챌린지가 없어요"
@@ -151,7 +144,6 @@ export default function Challenges() {
       )}
 
       <Spacing size={80} />
-      <FloatingTabBar items={TAB_ITEMS} />
       <Toast
         open={toastMsg !== null}
         position="bottom"

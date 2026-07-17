@@ -41,8 +41,10 @@ function fireTickHaptic() {
 }
 
 export default function Home() {
+  console.log('DEBUG Home render start');
   const navigate = useNavigate();
   const { profile, isPremium } = useApp();
+  console.log('DEBUG Home after useApp', profile, isPremium);
   const [sheetOpen, setSheetOpen] = useState(false);
 
   const nickname = profile?.nickname ?? '회원';
