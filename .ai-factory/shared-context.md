@@ -237,3 +237,4 @@ CRITICAL: Before creating any new function, type, or component, check the list a
 - 0016: AI 리포트 페이지 /report/:sessionId (files: src/pages/Report.tsx)
 - 0018: 프리미엄 페이지 /premium (files: src/pages/Premium.tsx)
 - 0005: 플랜/챌린지 저장소 + 날짜 유틸 (files: src/lib/storage.plans.ts, src/lib/storage.challenges.ts, src/lib/date.ts)
+- 0010: 카메라 훅 + 음성 피드백 유틸 (files: src/hooks/useCamera.ts, src/lib/speech.ts)
