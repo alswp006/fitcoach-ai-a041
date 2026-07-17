@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import Home from './pages/Home';
+import Onboarding from './pages/Onboarding';
 import { AppProvider } from './lib/AppContext';
 
 // Dev-only TDS Gallery route — `import.meta.env.DEV` is statically replaced
@@ -15,6 +16,7 @@ export default function App() {
     <AppProvider>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/onboarding" element={<Onboarding />} />
         {DevTdsGallery && (
           <Route
             path="/__tds-gallery"
