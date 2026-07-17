@@ -1,0 +1,21 @@
+{
+  "koreanName": "핏코치",
+  "englishName": "FitCoach",
+  "appName": "fit-coach",
+  "ageRating": "전체",
+  "supportEmail": "support@aifactory.dev",
+  "category": {
+    "primary": "건강"
+  },
+  "subtitle": "실시간 자세 교정 홈트레이닝",
+  "description": "스마트폰 카메라로 운동을 시작하면 AI가 실시간으로 당신의 자세를 분석하고 잘못된 부분을 음성으로 즉시 지적합니다. 운동 완료 후에는 칼로리 소모, 근육 활성도, 개선점을 담은 상세 리포트를 받습니다. AI가 매주 당신의 체력과 목표에 맞춰 운동 플랜을 조정해주므로 효율적인 운동이 가능합니다.",
+  "searchKeywords": [
+    "AI 자세 교정",
+    "홈트레이닝",
+    "운동 코칭",
+    "피트니스 앱",
+    "개인 트레이너",
+    "칼로리 관리",
+    "근력 운동"
+  ]
+}

@@ -309,12 +309,10 @@ describe("Packet 0001: Entity Types + RouteState + API Contracts", () => {
   });
 
   // AC-1: ApiError type
-  it("AC-1[P0]: ApiError type exists", async () => {
-    const { ApiError } = await import("@/lib/types");
-
-    expect(ApiError).toBeDefined();
-
-    const error: typeof ApiError = {
+  it("AC-1[P0]: ApiError type exists", () => {
+    // types.ts is a pure type-only module (AC-4: 0 runtime declarations),
+    // so ApiError has no runtime representation — verify its shape instead.
+    const error: ApiError = {
       error: "Internal Server Error",
     };
 
@@ -323,7 +321,7 @@ describe("Packet 0001: Entity Types + RouteState + API Contracts", () => {
 
   // AC-4: No runtime code (functions/constants)
   it("AC-4[P0]: src/lib/types.ts contains only type definitions", async () => {
-    const typeModule = await import("@/lib/types");
+    const typeModule: Record<string, unknown> = await import("@/lib/types");
     const exports = Object.keys(typeModule);
 
     // All exports should be TypeScript type names (PascalCase)
@@ -343,31 +341,29 @@ describe("Packet 0001: Entity Types + RouteState + API Contracts", () => {
   });
 
   // AC-1: All 8 entities + 4 API types + StorageResult + RouteState exported
-  it("AC-1[P0]: types.ts exports exactly 14 types total", async () => {
-    const typeModule = await import("@/lib/types");
-
-    const expectedExports = [
-      "UserProfile",
-      "Exercise",
-      "JointRule",
-      "WorkoutPlan",
-      "WorkoutSession",
-      "AnalysisReport",
-      "Challenge",
-      "AppFlags",
-      "PlanRequest",
-      "PlanResponse",
-      "ReportRequest",
-      "ReportResponse",
-      "ApiError",
-      "StorageResult",
-      "RouteState",
+  it("AC-1[P0]: types.ts exports all 8 entity + 4 API + StorageResult + RouteState types", () => {
+    // types.ts is a pure type-only module (AC-4: 0 runtime declarations), so these
+    // names have no runtime existence — `tsc --noEmit` is the real gate here (it
+    // fails the build if any of these imports don't resolve). This test asserts
+    // every type is actually usable to construct a value, at compile time.
+    type _AllTypesUsable = [
+      UserProfile,
+      Exercise,
+      JointRule,
+      WorkoutPlan,
+      WorkoutSession,
+      AnalysisReport,
+      Challenge,
+      AppFlags,
+      PlanRequest,
+      PlanResponse,
+      ReportRequest,
+      ReportResponse,
+      ApiError,
+      StorageResult,
+      RouteState,
     ];
 
-    const actualExports = Object.keys(typeModule);
-
-    for (const exp of expectedExports) {
-      expect(actualExports).toContain(exp);
-    }
+    expect(true).toBe(true);
   });
 });
