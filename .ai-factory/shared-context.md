@@ -217,3 +217,4 @@ CRITICAL: Before creating any new function, type, or component, check the list a
 - 0007: 환경변수 예시 파일 정리 (files: .env.example)
 - 0004: 세션/리포트 저장소 (200개 상한 + quota 재시도) (files: src/lib/storage.sessions.ts)
 - 0006: AppContext (플래그·프로필·프리미엄 만료 검사) (files: src/lib/AppContext.tsx, src/main.tsx)
+- 0008: AI API 클라이언트 (plan · report) (files: src/lib/api.ts)
