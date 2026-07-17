@@ -13,14 +13,45 @@ import { test, expect, type Page } from "@playwright/test";
 const ROUTES: { path: string; name: string }[] = [
   { path: "/", name: "home" },
   { path: "/onboarding", name: "onboarding" },
-  // { path: "/result", name: "result" },   // ← 이 앱의 라우트를 추가
-  // { path: "/settings", name: "settings" },
+  { path: "/report/visual-smoke-session", name: "report" },
 ];
 
 /** 데이터가 필요한 화면용 localStorage 시드(앱에 맞게 채워라). 앱 스크립트보다 먼저 실행된다. */
 async function seed(page: Page): Promise<void> {
   await page.addInitScript(() => {
-    // window.localStorage.setItem("MY_STORAGE_KEY", JSON.stringify({ /* ... */ }));
+    window.localStorage.setItem(
+      "fitcoach:sessions",
+      JSON.stringify([
+        {
+          id: "visual-smoke-session",
+          exerciseId: "squat",
+          date: "2026-07-15",
+          startedAt: 1700000000000,
+          durationSec: 300,
+          totalReps: 20,
+          avgFormScore: 82,
+          caloriesBurned: 120,
+          feedbackCounts: { knee_low: 2 },
+        },
+      ]),
+    );
+    window.localStorage.setItem(
+      "fitcoach:reports",
+      JSON.stringify([
+        {
+          sessionId: "visual-smoke-session",
+          formScore: 88,
+          improvements: ["무릎을 더 깊이 굽혀보세요", "속도를 일정하게 유지하세요"],
+          muscleActivation: [
+            { muscle: "대퇴사두근", percent: 70 },
+            { muscle: "둔근", percent: 55 },
+          ],
+          caloriesBurned: 245,
+          aiGenerated: true,
+          createdAt: 1700000000000,
+        },
+      ]),
+    );
   });
 }
 
