@@ -203,3 +203,4 @@ CRITICAL: Before creating any new function, type, or component, check the list a
 - 0002: Exercise 정적 카탈로그 (files: src/lib/exercises.ts)
 - 0003: localStorage 저수준 래퍼 + 프로필/플래그 CRUD (files: src/lib/storage.ts)
 - 0007: 환경변수 예시 파일 정리 (files: .env.example)
+- 0004: 세션/리포트 저장소 (200개 상한 + quota 재시도) (files: src/lib/storage.sessions.ts)
