@@ -1,4 +1,4 @@
-import type { Exercise } from './types';
+import type { Exercise } from '@/lib/types';
 
 // Free exercises (3)
 const squat: Exercise = {
