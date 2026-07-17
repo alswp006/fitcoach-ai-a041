@@ -228,3 +228,4 @@ CRITICAL: Before creating any new function, type, or component, check the list a
 - 0008: AI API 클라이언트 (plan · report) (files: src/lib/api.ts)
 - 0009: 프로모션 리워드 유틸 (5,000원 클램프) (files: src/lib/promo.ts)
 - 0012: 온보딩 페이지 /onboarding (files: src/pages/Onboarding.tsx)
+- 0016: AI 리포트 페이지 /report/:sessionId (files: src/pages/Report.tsx)
