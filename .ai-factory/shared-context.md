@@ -173,6 +173,9 @@ export interface RouteState {
   main.tsx
   pages/
     Home.tsx
+    Onboarding.tsx
+    Premium.tsx
+    Report.tsx
     __TdsGallery.tsx
   styles/
     globals.css
@@ -216,6 +219,9 @@ export interface RouteState {
   lib/storage.plans.ts → imports: lib/storage
   lib/storage.sessions.ts → imports: lib/types, lib/storage
   lib/storage.ts → imports: lib/types
+  pages/Onboarding.tsx → imports: components/ScreenScaffold, components/BottomCTA, lib/storage, lib/types
+  pages/Premium.tsx → imports: components/ScreenScaffold, components/Card, components/TossPurchase, lib/AppContext, lib/utils
+  pages/Report.tsx → imports: components/ScreenScaffold, components/SummaryHero, components/Card, components/MiniBar, components/StateView, components/TossRewardAd, lib/AppContext, lib/storage.sessions, lib/api, lib/utils, lib/types
 CRITICAL: Before creating any new function, type, or component, check the list above. If something similar exists, import and use it.
 
 ## Already Implemented (do NOT duplicate or overwrite)
@@ -229,3 +235,4 @@ CRITICAL: Before creating any new function, type, or component, check the list a
 - 0009: 프로모션 리워드 유틸 (5,000원 클램프) (files: src/lib/promo.ts)
 - 0012: 온보딩 페이지 /onboarding (files: src/pages/Onboarding.tsx)
 - 0016: AI 리포트 페이지 /report/:sessionId (files: src/pages/Report.tsx)
+- 0018: 프리미엄 페이지 /premium (files: src/pages/Premium.tsx)
